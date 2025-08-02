@@ -1,0 +1,15 @@
+services:
+  web:
+    container_name: web
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - main
+  backend:
+    container_name: backend
+    networks:
+      - main
+
+networks:
+  main:
