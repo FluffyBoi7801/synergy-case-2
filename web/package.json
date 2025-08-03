@@ -3,9 +3,32 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "dev": "vite",
+    "build": "vite build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Artem Kuchinskii",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.7.1"
+  },
+  "devDependencies": {
+    "@tanstack/react-query": "^5.84.1",
+    "@types/css-modules": "^1.0.5",
+    "@types/node": "^24.1.0",
+    "@types/react": "^19.1.9",
+    "@types/react-dom": "^19.1.7",
+    "@types/sass": "^1.43.1",
+    "@vitejs/plugin-react": "^4.7.0",
+    "axios": "^1.11.0",
+    "classnames": "^2.5.1",
+    "eslint": "^4.10.0",
+    "prettier": "^3.6.2",
+    "sass": "^1.89.2",
+    "typescript": "^5.9.2",
+    "vite": "^7.0.6"
+  }
 }

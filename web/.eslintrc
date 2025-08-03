@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "react-app",
+    "plugin:jest/recommended"
+  ],
+  "rules": {
+    "no-console": "error",
+    "quotes": ["error", "double"]
+  }
+}
