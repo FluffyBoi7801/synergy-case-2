@@ -15,5 +15,8 @@ body {
 }
 
 :root {
-    --header-backgeound: #F68E5F;
+    --header-background: #F68E5F;
+    --block-background: #F5DD90;
+    --button-hover: rgba(0, 0, 0, 0.2);
+    --button-active: rgba(0, 0, 0, 0.3);
 }

@@ -1,7 +1,16 @@
 import { FC } from "react";
+import classes from "./Posts.module.scss";
+import { Post } from "./ui";
 
 const Posts: FC = () => {
-  return <div>12312!!!</div>;
+  return (
+    <div className={classes.posts}>
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+    </div>
+  );
 };
 
 export default Posts;

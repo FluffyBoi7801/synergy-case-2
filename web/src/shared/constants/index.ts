@@ -16,3 +16,7 @@ export const BLOG_ROUTES_PATHS: Record<keyof typeof BLOG_ROUTES_KEYS, string> =
   {
     POSTS: "/posts",
   };
+
+export const COLORS = {
+  WHITE: "white",
+};
