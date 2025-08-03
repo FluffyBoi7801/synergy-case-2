@@ -22,8 +22,14 @@ const AppRouter = () => {
       children: [
         {
           path: SERVICES_ROOTS.BLOG,
-          element: <Navigate to={BLOG_ROUTES_KEYS.POSTS} />,
-          children: [{ path: BLOG_ROUTES_KEYS.POSTS, element: <Posts /> }],
+          element: <Outlet />,
+          children: [
+            { path: BLOG_ROUTES_KEYS.POSTS, element: <Posts /> },
+            {
+              path: "",
+              element: <Navigate to={"posts"} />,
+            },
+          ],
         },
         {
           path: ROOT_PATH,
