@@ -1,6 +1,9 @@
 services:
   web:
     container_name: web
+    build:
+      context: ./web/
+      dockerfile: Dockerfile
     ports:
       - "80:80"
       - "443:443"
@@ -8,8 +11,27 @@ services:
       - main
   backend:
     container_name: backend
+    build:
+      context: ./devops/configs/backend
+      dockerfile: Dockerfile
     networks:
       - main
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: "rivel"
+      POSTGRES_PASSWORD: "yuki"
+      POSTGRES_DB: postgres_db
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    networks:
+      - main
+
+volumes:
+  pgdata:
+    driver: local
 
 networks:
   main:
