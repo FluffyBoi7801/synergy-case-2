@@ -7,4 +7,6 @@ RUN npm run build
 
 FROM nginx:stable-alpine as prod
 COPY --from=app ./web/dist /usr/share/nginx/html
-COPY /devops/configs/web/nginx.conf /etc/nginx/default.conf
+COPY /devops/configs/web/nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 3000
+CMD ["/usr/sbin/nginx", "-g", "daemon off;"]

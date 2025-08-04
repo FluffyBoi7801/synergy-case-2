@@ -1,14 +1,23 @@
 services:
-  web:
-    container_name: web
+  ingress:
+    container_name: ingress
     build:
       context: .
-      dockerfile: /devops/configs/web/Dockerfile
+      dockerfile: ./devops/configs/ingress/Dockerfile
     ports:
       - "80:80"
       - "443:443"
     networks:
       - main
+
+  web:
+    container_name: web
+    build:
+      context: .
+      dockerfile: /devops/configs/web/Dockerfile
+    networks:
+      - main
+
   backend:
     container_name: backend
     build:
@@ -16,6 +25,7 @@ services:
       dockerfile: Dockerfile
     networks:
       - main
+
   postgres:
     container_name: postgres
     image: postgres:latest
@@ -35,3 +45,4 @@ volumes:
 
 networks:
   main:
+    driver: bridge
