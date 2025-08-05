@@ -1,6 +1,5 @@
 import type { Request, Response } from "express";
 import { execSync } from "child_process";
-import { prismaClient } from "../../../utils";
 
 export const versionService = {
   getServiceVersion: async (req: Request, res: Response) => {
