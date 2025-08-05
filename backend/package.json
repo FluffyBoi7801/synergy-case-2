@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "dev": "set NODE_ENV=develop && nodemon src/index.ts",
+    "build": "tsc",
+    "start": "set NODE_ENV=production && node build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Artem Kuchinskii",
@@ -12,6 +15,14 @@
     "express": "^5.1.0"
   },
   "devDependencies": {
-    "@types/express": "^5.0.3"
+    "@types/express": "^5.0.3",
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "dotenv": "^17.2.1",
+    "eslint": "^9.32.0",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
   }
 }
