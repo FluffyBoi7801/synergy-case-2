@@ -8,9 +8,9 @@ export const versionService = {
       `Получен запрос на получение версии от клиента ${req.ip} в ${new Date()}`,
     );
 
-    const fignya = prismaClient.user.findMany();
-
-    console.log(fignya);
+    prismaClient.user.findMany().then((user) => {
+      console.log(user);
+    });
 
     const revision = execSync("git rev-parse HEAD").toString().trim();
     res.status(200).json({ version: revision });
