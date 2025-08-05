@@ -8,10 +8,6 @@ export const versionService = {
       `Получен запрос на получение версии от клиента ${req.ip} в ${new Date()}`,
     );
 
-    prismaClient.user.findMany().then((user) => {
-      console.log(user);
-    });
-
     const revision = execSync("git rev-parse HEAD").toString().trim();
     res.status(200).json({ version: revision });
   },
