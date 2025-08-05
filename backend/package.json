@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "set NODE_ENV=develop && nodemon src/index.ts",
+    "dev": "set NODE_ENV=develop && npx prisma migrate deploy && nodemon src/index.ts",
     "build": "tsc",
-    "start": "set NODE_ENV=production && node build/index.js",
+    "start": "set NODE_ENV=production && npx prisma migrate deploy && node build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Artem Kuchinskii",
