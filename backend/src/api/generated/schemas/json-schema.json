@@ -23,9 +23,30 @@
           "type": "string"
         },
         "lastlogin": {
-          "type": "string"
+          "type": "string",
+          "format": "date-time"
         },
         "lastip": {
+          "type": "string"
+        },
+        "access_token": {
+          "type": "string"
+        },
+        "refresh_token": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "is_active": {
+          "type": "boolean"
+        },
+        "activation_code": {
           "type": "string"
         }
       }
