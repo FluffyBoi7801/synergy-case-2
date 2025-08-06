@@ -22,6 +22,11 @@ export const userService = {
       `Получен запрос на регистрацию нового пользователя с email ${email} от ${req.ip}`,
     );
 
+    if (!firstname || !lastname || !email || !password) {
+      log(LogType.ERROR, `Получен некорректный запрос на регистрацию`);
+      return res.status(422);
+    }
+
     const exisitingUser = await prismaClient.user.findUnique({
       where: { email },
     });

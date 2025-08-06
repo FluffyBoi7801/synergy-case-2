@@ -1,11 +1,13 @@
 import { Router } from "express";
 import { API_ENDPOINTS } from "./constants";
 import { versionService } from "./services/version";
+import { userService } from "./services/user";
 
 const router = (() => {
   const router = Router();
 
   router.get(API_ENDPOINTS.VERSION, versionService.getServiceVersion);
+  router.post(API_ENDPOINTS.REGISTER, userService.register);
 
   return router;
 })();
