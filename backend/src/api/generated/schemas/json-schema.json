@@ -20,30 +20,48 @@
           "type": "string"
         },
         "phone": {
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "password": {
           "type": "string"
         },
         "lastlogin": {
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "lastip": {
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "access_token": {
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "refresh_token": {
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "created_at": {
           "type": "string",
           "format": "date-time"
         },
         "updated_at": {
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "date-time"
         },
         "is_active": {

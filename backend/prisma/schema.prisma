@@ -24,14 +24,14 @@ model User {
   firstname String
   lastname String
   email String @unique
-  phone String @unique
+  phone String? @unique
   password String
-  lastlogin DateTime
-  lastip String
-  access_token String @unique
-  refresh_token String @unique
+  lastlogin DateTime?
+  lastip String?
+  access_token String? @unique
+  refresh_token String? @unique
   created_at DateTime @default(now())
-  updated_at DateTime
+  updated_at DateTime?
   is_active Boolean
   activation_code String @unique
 }
