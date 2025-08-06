@@ -1,8 +1,7 @@
 import type { Request, Response } from "express";
 import type { User } from "@prisma/client";
-import { log, prismaClient } from "../../../utils";
+import { env, log, prismaClient, sendActivation } from "../../../utils";
 import { LogType } from "../../../utils/logger";
-import { generateTokens } from "./utils";
 import { hash } from "bcrypt";
 import { v4 as uuid } from "uuid";
 
@@ -28,23 +27,54 @@ export const userService = {
     });
 
     if (exisitingUser) {
-      return log(
+      log(
         LogType.ERROR,
         `При регистрации пользователя с email ${email} от ${req.ip} произошла ошибка. Пользователь с таким email уже сущсетвует`,
       );
+      return res.status(409);
     }
 
     const passwordHash = await hash(password, SALT_ROUNDS);
+    const activationCode: string = uuid();
 
-    await prismaClient.user.create({
-      data: {
-        firstname,
-        lastname,
-        email,
-        password: passwordHash,
-        is_active: false,
-        activation_code: uuid(),
-      },
-    });
+    await prismaClient.user
+      .create({
+        data: {
+          firstname: firstname,
+          lastname: lastname,
+          email: email,
+          password: passwordHash,
+          activation_code: activationCode,
+        },
+      })
+      .then(() => {
+        log(
+          LogType.INFO,
+          `Пользователь с email ${email} успешно записан в базу`,
+        );
+      })
+      .catch(() => {
+        log(LogType.ERROR, `Ошибка регистрации пользователя с email ${email}`);
+      });
+
+    await sendActivation({
+      to: email,
+      name: `${firstname} ${lastname}`,
+      activationLink: `http://${env.DOMAIN_URL}/api/activation/${activationCode}`,
+    })
+      .then(() => {
+        log(
+          LogType.INFO,
+          `Пользователю с email ${email} успешно отправлена ссылка активации`,
+        );
+      })
+      .catch(() => {
+        log(
+          LogType.ERROR,
+          `Ошибка при отправке письма активации пользователю с email ${email}`,
+        );
+      });
+
+    return res.status(201);
   },
 };

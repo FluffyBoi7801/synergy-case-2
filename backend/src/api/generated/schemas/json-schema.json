@@ -65,10 +65,14 @@
           "format": "date-time"
         },
         "is_active": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "activation_code": {
-          "type": "string"
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     }

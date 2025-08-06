@@ -32,6 +32,6 @@ model User {
   refresh_token String? @unique
   created_at DateTime @default(now())
   updated_at DateTime?
-  is_active Boolean
-  activation_code String @unique
+  is_active Boolean @default(false)
+  activation_code String? @unique
 }

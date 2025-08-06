@@ -30,6 +30,6 @@ export const sendActivation = async ({
     from: env.SMTP_USER,
     to,
     subject: 'Активация аккаунта в экосистеме "Я - блогер"',
-    html: `<h1>Уважаемый ${name}, Ваша ссылка на активацию аккаунта: ${activationLink}</h1>`,
+    html: `<h1>Уважаемый ${name}, Ваша ссылка на активацию аккаунта: <a href="${activationLink}">Активация</a></h1>`,
   });
 };
