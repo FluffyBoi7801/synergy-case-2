@@ -10,7 +10,7 @@ generator client {
 
 generator json_schema {
   provider = "prisma-json-schema-generator"
-  output = "../src/api/generated/schemas"
+  output   = "../src/api/generated/schemas"
 }
 
 datasource db {
@@ -24,4 +24,7 @@ model User {
   lastname String
   email String @unique
   phone String @unique
+  password String
+  lastlogin String
+  lastip String
 }
