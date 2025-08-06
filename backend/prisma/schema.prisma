@@ -20,6 +20,7 @@ datasource db {
 
 model User {
   id String @id @default(uuid()) @unique
+  tag String @default(uuid()) @unique
   firstname String
   lastname String
   email String @unique
