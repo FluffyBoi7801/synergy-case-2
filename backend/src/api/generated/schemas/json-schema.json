@@ -18,6 +18,15 @@
         },
         "phone": {
           "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "lastlogin": {
+          "type": "string"
+        },
+        "lastip": {
+          "type": "string"
         }
       }
     }
