@@ -24,7 +24,7 @@ export const userService = {
 
     if (!firstname || !lastname || !email || !password) {
       log(LogType.ERROR, `Получен некорректный запрос на регистрацию`);
-      return res.status(422);
+      return res.status(422).json({ message: "Запрос составлен некорректно" });
     }
 
     const exisitingUser = await prismaClient.user.findUnique({
@@ -36,7 +36,9 @@ export const userService = {
         LogType.ERROR,
         `При регистрации пользователя с email ${email} от ${req.ip} произошла ошибка. Пользователь с таким email уже существует`,
       );
-      return res.status(409);
+      return res
+        .status(409)
+        .json({ message: `Такой email уже зарегистрирован` });
     }
 
     const passwordHash = await hash(password, SALT_ROUNDS);
@@ -80,6 +82,8 @@ export const userService = {
         );
       });
 
-    return res.status(201);
+    return res.status(201).json({
+      message: `Пользователь ${firstname} ${lastname} успешно зарегистрирован`,
+    });
   },
 };

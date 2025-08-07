@@ -1,4 +1,4 @@
 export const API_ENDPOINTS: Record<string, string> = {
   VERSION: "/version",
-  REGISTER: "/register",
+  USERS: "/users",
 };

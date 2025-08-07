@@ -7,7 +7,7 @@ const router = (() => {
   const router = Router();
 
   router.get(API_ENDPOINTS.VERSION, versionService.getServiceVersion);
-  router.post(API_ENDPOINTS.REGISTER, userService.register);
+  router.post(API_ENDPOINTS.USERS, userService.register);
 
   return router;
 })();
