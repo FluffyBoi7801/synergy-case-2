@@ -34,7 +34,7 @@ export const userService = {
     if (exisitingUser) {
       log(
         LogType.ERROR,
-        `При регистрации пользователя с email ${email} от ${req.ip} произошла ошибка. Пользователь с таким email уже сущсетвует`,
+        `При регистрации пользователя с email ${email} от ${req.ip} произошла ошибка. Пользователь с таким email уже существует`,
       );
       return res.status(409);
     }
