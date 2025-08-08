@@ -3,16 +3,12 @@ import { z } from "zod";
 
 extendZodWithOpenApi(z);
 
-export const CreateUserRequest = z.object({
-  firstname: z.string(),
-  lastname: z.string(),
+export const LoginUserRequest = z.object({
   email: z.email(),
   password: z.string(),
 });
 
-export const CREATE_USER_REQUEST_EXAMPLE = {
-  firstname: "Иван",
-  lastname: "Иванов",
+export const LOGIN_USER_REQUEST_EXAMPLE = {
   email: "ivanov@example.com",
   password: "123456789",
 };

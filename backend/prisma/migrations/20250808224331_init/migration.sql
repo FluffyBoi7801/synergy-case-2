@@ -9,7 +9,6 @@ CREATE TABLE "public"."User" (
     "password" TEXT NOT NULL,
     "lastlogin" TIMESTAMP(3),
     "lastip" TEXT,
-    "access_token" TEXT,
     "refresh_token" TEXT,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3),
@@ -30,9 +29,6 @@ CREATE UNIQUE INDEX "User_email_key" ON "public"."User"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_phone_key" ON "public"."User"("phone");
-
--- CreateIndex
-CREATE UNIQUE INDEX "User_access_token_key" ON "public"."User"("access_token");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_refresh_token_key" ON "public"."User"("refresh_token");

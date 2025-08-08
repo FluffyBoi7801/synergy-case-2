@@ -10,6 +10,7 @@ const router = (() => {
 
   router.post(API_ENDPOINTS.USERS, userService.register);
   router.get(`${API_ENDPOINTS.ACTIVATE}/:uuid`, userService.activate);
+  router.post(API_ENDPOINTS.LOGIN, userService.login);
 
   return router;
 })();

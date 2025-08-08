@@ -23,7 +23,6 @@ model User {
   password String
   lastlogin DateTime?
   lastip String?
-  access_token String? @unique
   refresh_token String? @unique
   created_at DateTime @default(now())
   updated_at DateTime?
