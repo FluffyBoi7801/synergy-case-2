@@ -1,8 +1,7 @@
 import { HTTP_METHODS } from "../../../constants";
 import { API_ENDPOINTS } from "../../constants";
-import { CREATE_USER_REQUEST_EXAMPLE } from "../models";
+import { CREATE_USER_REQUEST_EXAMPLE, MessageResponse } from "../models";
 import { createApiResponse } from "../utils/responseBuilder";
-import { z } from "zod";
 
 export const createUser = {
   method: HTTP_METHODS.POST,
@@ -17,7 +16,7 @@ export const createUser = {
     },
   },
   responses: createApiResponse(
-    z.object({ message: z.string() }),
+    MessageResponse,
     "Successfully create user",
     201,
   ),

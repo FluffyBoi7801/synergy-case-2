@@ -4,6 +4,8 @@ import { env, log, prismaClient, sendActivation } from "../../../utils";
 import { LogType } from "../../../utils/logger";
 import { hash } from "bcrypt";
 import { v4 as uuid } from "uuid";
+import { API_ENDPOINT } from "../../../constants";
+import { API_ENDPOINTS } from "../../constants";
 
 const SALT_ROUNDS = 10;
 
@@ -67,7 +69,7 @@ export const userService = {
     await sendActivation({
       to: email,
       name: `${firstname} ${lastname}`,
-      activationLink: `http://${env.DOMAIN_URL}/api/activation/${activationCode}`,
+      activationLink: `http://${env.DOMAIN_URL}${API_ENDPOINT}${API_ENDPOINTS.ACTIVATE}/${activationCode}`,
     })
       .then(() => {
         log(
@@ -85,5 +87,52 @@ export const userService = {
     return res.status(201).json({
       message: `Пользователь ${firstname} ${lastname} успешно зарегистрирован`,
     });
+  },
+  activate: async (req: Request, res: Response) => {
+    const uuid = req.params.uuid;
+    log(
+      LogType.INFO,
+      `Получен запрос на активацию пользователя с uuid ${uuid} от ${req.ip}`,
+    );
+
+    const user = await prismaClient.user.findUnique({
+      where: { activation_code: uuid },
+    });
+
+    if (!user) {
+      log(
+        LogType.ERROR,
+        `При активации пользователя с uuid ${uuid} от ${req.ip} произошла ошибка. Пользователь не найден`,
+      );
+      return res.status(404).json({ message: "Пользователь не найден" });
+    } else if (user.is_active) {
+      log(
+        LogType.ERROR,
+        `При активации пользователя с uuid ${uuid} от ${req.ip} произошла ошибка. Пользователь уже активирован`,
+      );
+      return res.status(409).json({ message: "Пользователь уже активирован" });
+    }
+
+    await prismaClient.user
+      .update({
+        where: { id: user.id },
+        data: { is_active: true, activation_code: null },
+      })
+      .catch(() => {
+        log(
+          LogType.ERROR,
+          `Ошибка при обновлении записи пользователя с uuid ${uuid} при запросе от ${req.ip}`,
+        );
+        return res
+          .status(500)
+          .json({ message: "При активации произошла ошибка" });
+      });
+
+    log(
+      LogType.INFO,
+      `Запись пользователя с uuid ${uuid} успешно обновлена при запросе от ${req.ip}`,
+    );
+
+    return res.status(202).json({ message: "Пользователь активирован" });
   },
 };

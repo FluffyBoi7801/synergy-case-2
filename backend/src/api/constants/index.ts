@@ -1,4 +1,5 @@
-export const API_ENDPOINTS: Record<string, string> = {
+export const API_ENDPOINTS = {
   VERSION: "/version",
   USERS: "/users",
+  ACTIVATE: "/activate",
 };

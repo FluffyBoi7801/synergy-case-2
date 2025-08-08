@@ -7,7 +7,9 @@ const router = (() => {
   const router = Router();
 
   router.get(API_ENDPOINTS.VERSION, versionService.getServiceVersion);
+
   router.post(API_ENDPOINTS.USERS, userService.register);
+  router.get(`${API_ENDPOINTS.ACTIVATE}/:uuid`, userService.activate);
 
   return router;
 })();
