@@ -8,4 +8,5 @@ export const userService = {
   register: registrationHandler,
   activate: activationHandler,
   login: loginHandler,
+  current: () => {},
 };

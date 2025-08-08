@@ -5,7 +5,7 @@ import { LogType } from "../../../../utils/logger";
 import { hash } from "bcrypt";
 import { v4 as uuid } from "uuid";
 import { API_ENDPOINT } from "../../../../constants";
-import { API_ENDPOINTS } from "../../../constants";
+import { API_ENDPOINTS, USERS_API_ENDPOINTS } from "../../../constants";
 import { SALT_ROUNDS } from "../constants";
 
 export const registrationHandler = async (
@@ -62,7 +62,7 @@ export const registrationHandler = async (
   await sendActivation({
     to: email,
     name: `${firstname} ${lastname}`,
-    activationLink: `http://${env.DOMAIN_URL}${API_ENDPOINT}${API_ENDPOINTS.ACTIVATE}/${activationCode}`,
+    activationLink: `http://${env.DOMAIN_URL}${API_ENDPOINT}${API_ENDPOINTS.USERS}${USERS_API_ENDPOINTS.ACTIVATE}/${activationCode}`,
   })
     .then(() => {
       log(

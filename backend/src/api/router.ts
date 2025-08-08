@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { API_ENDPOINTS } from "./constants";
+import { API_ENDPOINTS, USERS_API_ENDPOINTS } from "./constants";
 import { versionService } from "./services/version";
 import { userService } from "./services/user";
 
@@ -9,8 +9,15 @@ const router = (() => {
   router.get(API_ENDPOINTS.VERSION, versionService.getServiceVersion);
 
   router.post(API_ENDPOINTS.USERS, userService.register);
-  router.get(`${API_ENDPOINTS.ACTIVATE}/:uuid`, userService.activate);
+  router.get(
+    `${API_ENDPOINTS.USERS}${USERS_API_ENDPOINTS.ACTIVATE}/:uuid`,
+    userService.activate,
+  );
   router.post(API_ENDPOINTS.LOGIN, userService.login);
+  router.get(
+    `${API_ENDPOINTS.USERS}${USERS_API_ENDPOINTS.CURRENT}`,
+    userService.current,
+  );
 
   return router;
 })();

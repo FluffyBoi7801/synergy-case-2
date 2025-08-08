@@ -25,7 +25,7 @@ model User {
   lastip String?
   refresh_token String? @unique
   created_at DateTime @default(now())
-  updated_at DateTime?
+  updated_at DateTime? @updatedAt
   is_active Boolean @default(false)
   activation_code String? @unique
 }
