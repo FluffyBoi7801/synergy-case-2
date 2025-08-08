@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import type { User } from "@prisma/client";
-import { log, prismaClient } from "../../../../utils";
+import { env, log, prismaClient } from "../../../../utils";
 import { LogType } from "../../../../utils/logger";
 import { generateTokens } from "../utils";
 
@@ -52,7 +52,15 @@ export const loginHandler = async (
       },
     });
 
-    return res.status(200).json({ ...tokens });
+    return res
+      .status(200)
+      .cookie("refreshToken", tokens.refreshToken, {
+        httpOnly: true,
+        secure: env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      })
+      .send();
   } catch (error) {
     if (error instanceof Error) {
       log(LogType.ERROR, error.message);
