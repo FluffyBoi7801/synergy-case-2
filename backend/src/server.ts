@@ -29,19 +29,29 @@ const startService = () => {
 
     const generator = new OpenApiGeneratorV3(registry.definitions);
 
+    const openApiDocument = generator.generateDocument({
+      openapi: "3.0.0",
+      info: {
+        version: version,
+        title: "Blogger API",
+      },
+      servers: [{ url: "/api" }],
+    });
+
+    openApiDocument.components = {
+      securitySchemes: {
+        refreshToken: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    };
+
     app.use(
       API_DOCS_ENDPOINT,
       swaggerUi.serve,
-      swaggerUi.setup(
-        generator.generateDocument({
-          openapi: "3.0.0",
-          info: {
-            version: version,
-            title: "Blogger API",
-          },
-          servers: [{ url: "/api" }],
-        }),
-      ),
+      swaggerUi.setup(openApiDocument),
     );
   }
 

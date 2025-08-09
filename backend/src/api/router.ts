@@ -2,6 +2,7 @@ import { Router } from "express";
 import { API_ENDPOINTS, USERS_API_ENDPOINTS } from "./constants";
 import { versionService } from "./services/version";
 import { userService } from "./services/user";
+import { authenticateToken } from "./services/utils/authenticateToken";
 
 const router = (() => {
   const router = Router();
@@ -16,6 +17,7 @@ const router = (() => {
   router.post(API_ENDPOINTS.LOGIN, userService.login);
   router.get(
     `${API_ENDPOINTS.USERS}${USERS_API_ENDPOINTS.CURRENT}`,
+    authenticateToken,
     userService.current,
   );
 
