@@ -3,6 +3,7 @@ import type { User } from "@prisma/client";
 import { env, log, prismaClient } from "../../../../utils";
 import { LogType } from "../../../../utils/logger";
 import { generateTokens } from "../utils";
+import bcrypt from "bcrypt";
 
 export const loginHandler = async (
   req: Request<any, any, Pick<User, "email" | "password">>,
@@ -42,6 +43,16 @@ export const loginHandler = async (
     return res.status(401).json({ message: "Пользователь не активирован" });
   }
 
+  const arePasswordsEqual = await bcrypt.compare(password, user.password);
+
+  if (!arePasswordsEqual) {
+    log(
+      LogType.ERROR,
+      `При авторизации пользователя с email ${email} от ${req.ip} произошла ошибка. Неверный пароль`,
+    );
+    return res.status(401).json({ message: "Неверный пароль" });
+  }
+
   try {
     const tokens = generateTokens({ userId: user.id });
 
@@ -54,6 +65,12 @@ export const loginHandler = async (
 
     return res
       .status(200)
+      .cookie("accessToken", tokens.accessToken, {
+        httpOnly: true,
+        secure: env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 30 * 60 * 1000,
+      })
       .cookie("refreshToken", tokens.refreshToken, {
         httpOnly: true,
         secure: env.NODE_ENV === "production",

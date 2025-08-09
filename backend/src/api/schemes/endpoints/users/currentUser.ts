@@ -10,7 +10,7 @@ export const currentUser = {
   tags: ["User"],
   request: {
     headers: z.object({
-      refreshToken: z.string(),
+      accessToken: z.string(),
     }),
   },
   responses: createApiResponse(

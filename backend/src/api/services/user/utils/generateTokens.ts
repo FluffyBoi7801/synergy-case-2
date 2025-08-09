@@ -4,11 +4,11 @@ import { JWT_SETTINGS } from "../constants";
 const ACCESS_TOKEN_EXPIRES = "30m";
 const REFRESH_TOKEN_EXPIRES = "7d";
 
-type Payload = {
+export type TokenPayload = {
   userId: string;
 };
 
-export const generateTokens = (payload: Payload) => {
+export const generateTokens = (payload: TokenPayload) => {
   if (JWT_SETTINGS.secret && JWT_SETTINGS.refreshSecret) {
     const accessToken = sign(payload, JWT_SETTINGS.secret, {
       expiresIn: ACCESS_TOKEN_EXPIRES,
