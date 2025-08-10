@@ -28,6 +28,7 @@
     "classnames": "^2.5.1",
     "eslint": "^4.10.0",
     "prettier": "^3.6.2",
+    "react-hook-form": "^7.62.0",
     "sass": "^1.89.2",
     "typescript": "^5.9.2",
     "vite": "^7.0.6"
