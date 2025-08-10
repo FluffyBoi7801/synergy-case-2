@@ -1,0 +1,11 @@
+@mixin modalForm {
+  width: 800px;
+
+  &_sm {
+    width: 400px;
+  }
+
+  &_lg {
+    width: 1200px;
+  }
+}

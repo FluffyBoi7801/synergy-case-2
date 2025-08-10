@@ -2,6 +2,7 @@ import { FC } from "react";
 import classes from "./Login.module.scss";
 import { Modal } from "../../../../shared/ui";
 import { useModal } from "../../../../shared/ui/Modal/hooks";
+import { LoginModal } from "./LoginModal";
 
 export const Login: FC = () => {
   const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
@@ -30,7 +31,7 @@ export const Login: FC = () => {
           Зарегистрироваться
         </button>
       </div>
-      <Modal isOpen={isModalOpen}>123!!!</Modal>
+      <LoginModal isOpen={isModalOpen} onClose={handleModalClose} />
     </>
   );
 };
