@@ -2,7 +2,7 @@ import { Router } from "express";
 import { API_ENDPOINTS, USERS_API_ENDPOINTS } from "./constants";
 import { versionService } from "./services/version";
 import { userService } from "./services/user";
-import { authenticateToken } from "./services/utils/authenticateToken";
+import { authenticateToken } from "./services/utils";
 
 const router = (() => {
   const router = Router();

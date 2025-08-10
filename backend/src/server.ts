@@ -9,12 +9,14 @@ import {
 } from "@asteasolutions/zod-to-openapi";
 import { version } from "../package.json";
 import { swaggerRegistrator } from "./api/schemes";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
 const PORT = env.PORT || 8000;
 
 app.use(express.json());
+app.use(cookieParser());
 
 console.log(`Запуск сервиса в режиме ${env.NODE_ENV}`);
 
