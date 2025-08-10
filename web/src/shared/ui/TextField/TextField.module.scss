@@ -1,0 +1,23 @@
+.textField {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &__input {
+    all: unset;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 8px;
+    outline: 1px solid black;
+    background-color: white;
+    caret-color: black;
+    color: black;
+    user-select: text;
+    cursor: text;
+    padding: 8px;
+
+    &:focus {
+      outline: 1px solid blue;   /* Контур при фокусе */
+    }
+  }
+}

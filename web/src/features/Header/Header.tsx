@@ -1,7 +1,7 @@
 import { FC } from "react";
 import classes from "./Header.module.scss";
 import { Login, Logo, Profile } from "./ui";
-import { NineDots } from "../../shared/icons";
+import { NineDots } from "@/shared/icons";
 
 const Header: FC = () => {
   const isUserLoggedin = false;

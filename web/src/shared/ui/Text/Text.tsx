@@ -8,13 +8,25 @@ export enum TextSize {
   LG = "lg",
 }
 
+export enum TextAlign {
+  LEFT = "left",
+  CENTER = "center",
+  RIGHT = "right",
+}
+
 type Props = {
   size?: TextSize;
+  align?: TextAlign;
 };
 
 export const Text: FC<PropsWithChildren<Props>> = ({
   size = TextSize.MD,
+  align = TextAlign.LEFT,
   children,
 }) => {
-  return <p className={cn(classes[`text_${size}`])}>{children}</p>;
+  return (
+    <p className={cn(classes[`text_${size}`], classes[`text_${align}`])}>
+      {children}
+    </p>
+  );
 };

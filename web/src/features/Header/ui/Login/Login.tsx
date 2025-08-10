@@ -1,18 +1,23 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import classes from "./Login.module.scss";
-import { Modal } from "../../../../shared/ui";
-import { useModal } from "../../../../shared/ui/Modal/hooks";
+import { useModal } from "@/shared/ui/Modal/hooks";
 import { LoginModal } from "./LoginModal";
+import { ModalVariants } from "@/features/Header/ui/Login/LoginModal/forms/constants.ts";
 
 export const Login: FC = () => {
   const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
+  const [modalVariant, setModalVariant] = useState<ModalVariants>(
+    ModalVariants.LOGIN
+  );
 
   const handleLoginClick = () => {
     handleModalOpen();
+    setModalVariant(ModalVariants.LOGIN);
   };
 
   const handleRegisterClick = () => {
     handleModalOpen();
+    setModalVariant(ModalVariants.REGISTRATION);
   };
 
   return (
@@ -31,7 +36,11 @@ export const Login: FC = () => {
           Зарегистрироваться
         </button>
       </div>
-      <LoginModal isOpen={isModalOpen} onClose={handleModalClose} />
+      <LoginModal
+        variant={modalVariant}
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+      />
     </>
   );
 };

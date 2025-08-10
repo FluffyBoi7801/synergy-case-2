@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { NineDots } from "../../../../shared/icons";
 import classes from "./Profile.module.scss";
 
 export const Profile: FC = () => {
