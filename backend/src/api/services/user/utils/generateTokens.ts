@@ -1,7 +1,7 @@
 import { sign } from "jsonwebtoken";
 import { JWT_SETTINGS } from "../constants";
 
-const ACCESS_TOKEN_EXPIRES = "1s";
+const ACCESS_TOKEN_EXPIRES = "30m";
 const REFRESH_TOKEN_EXPIRES = "7d";
 
 export type TokenPayload = {
