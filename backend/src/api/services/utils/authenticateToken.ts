@@ -75,24 +75,25 @@ export const authenticateToken = async (
   const { accessToken, refreshToken } = req.cookies;
   log(LogType.INFO, `Начата авторизация пользователя для запроса от ${req.ip}`);
 
-  if (!accessToken && refreshToken) {
-    return await refreshTokens(req, res, next, refreshToken);
-  }
-
   try {
-    const decodedToken = verifyToken(accessToken);
+    if (!accessToken && !refreshToken) {
+      throw new Error("access token и refresh token отсутствуют");
+    } else if (!accessToken && refreshToken) {
+      return await refreshTokens(req, res, next, refreshToken);
+    } else if (accessToken) {
+      const decodedToken = verifyToken(accessToken);
 
-    if (decodedToken) {
-      res.locals.user = await prismaClient.user.findUnique({
-        where: { id: decodedToken.userId },
-      });
+      if (decodedToken) {
+        res.locals.user = await prismaClient.user.findUnique({
+          where: { id: decodedToken.userId },
+        });
 
-      log(LogType.INFO, `Запрос от ${req.ip} успешно авторизован`);
+        log(LogType.INFO, `Запрос от ${req.ip} успешно авторизован`);
 
-      next();
+        next();
+      }
     }
   } catch (error) {
-    console.log(error);
     if (error instanceof TokenExpiredError) {
       await refreshTokens(req, res, next, refreshToken);
     } else if (error instanceof Error) {
@@ -100,7 +101,7 @@ export const authenticateToken = async (
         LogType.ERROR,
         `Ошибка при авторизации пользователя для запроса от ${req.ip}: ${error.message}`,
       );
+      return res.status(401).json({ message: "Ошибка авторизации запроса" });
     }
-    return res.status(401).json({ message: "Ошибка авторизации запроса" });
   }
 };
