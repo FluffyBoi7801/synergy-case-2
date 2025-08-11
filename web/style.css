@@ -17,6 +17,9 @@ body {
 :root {
     --header-background: #F68E5F;
     --block-background: #F5DD90;
+    --block-dark-background: #252525;
     --button-hover: rgba(0, 0, 0, 0.2);
     --button-active: rgba(0, 0, 0, 0.3);
+    --button-background: #324376;
+    --button-background-hover: #586BA4;
 }

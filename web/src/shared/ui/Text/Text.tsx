@@ -15,17 +15,25 @@ export enum TextAlign {
 }
 
 type Props = {
+  className?: string;
   size?: TextSize;
   align?: TextAlign;
 };
 
 export const Text: FC<PropsWithChildren<Props>> = ({
+  className,
   size = TextSize.MD,
   align = TextAlign.LEFT,
   children,
 }) => {
   return (
-    <p className={cn(classes[`text_${size}`], classes[`text_${align}`])}>
+    <p
+      className={cn(
+        className,
+        classes[`text_${size}`],
+        classes[`text_${align}`]
+      )}
+    >
       {children}
     </p>
   );

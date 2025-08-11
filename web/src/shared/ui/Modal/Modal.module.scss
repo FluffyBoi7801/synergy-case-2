@@ -9,15 +9,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.35);
 
   &__container {
     @include mixins.modalForm;
 
     height: fit-content;
-    padding: 12px 24px;
     border-radius: 8px;
     box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.2);
-    background-color: var(--block-background);
+    background-color: var(--block-dark-background);
+    outline: 2px solid var(--block-background);
   }
 }

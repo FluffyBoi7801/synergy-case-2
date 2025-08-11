@@ -1,4 +1,26 @@
 .button {
+  all: unset;
+  box-sizing: border-box;
   width: 100%;
-  background: rebeccapurple;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background-color: var(--button-background);
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--button-background-hover);
+  }
+
+  &:active {
+    background-color: var(--button-background);
+  }
+
+  &__disabled {
+    pointer-events: none;
+  }
 }
