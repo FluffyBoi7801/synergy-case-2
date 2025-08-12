@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "codegen": "sta -p http://localhost:8000/api-docs -o ./src/shared/api/__generated__ -n apiTypes.ts --no-client --extract-enums --extract-request-params",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Artem Kuchinskii",
@@ -26,11 +27,13 @@
     "@vitejs/plugin-react": "^4.7.0",
     "axios": "^1.11.0",
     "classnames": "^2.5.1",
+    "dotenv": "^17.2.1",
     "eslint": "^4.10.0",
     "framer-motion": "^12.23.12",
     "prettier": "^3.6.2",
     "react-hook-form": "^7.62.0",
     "sass": "^1.89.2",
+    "swagger-typescript-api": "^12.0.4",
     "typescript": "^5.9.2",
     "vite": "^7.0.6"
   }

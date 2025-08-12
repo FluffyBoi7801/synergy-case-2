@@ -31,19 +31,24 @@ const startService = () => {
 
     const generator = new OpenApiGeneratorV3(registry.definitions);
 
+    const openAPIDocument = generator.generateDocument({
+      openapi: "3.0.0",
+      info: {
+        version: version,
+        title: "Blogger API",
+      },
+      servers: [{ url: "/api" }],
+    });
+
+    app.use(`${API_DOCS_ENDPOINT}/swagger.json`, (req, res) => {
+      res.setHeader("Content-Type", "application/json");
+      res.send(openAPIDocument);
+    });
+
     app.use(
       API_DOCS_ENDPOINT,
       swaggerUi.serve,
-      swaggerUi.setup(
-        generator.generateDocument({
-          openapi: "3.0.0",
-          info: {
-            version: version,
-            title: "Blogger API",
-          },
-          servers: [{ url: "/api" }],
-        }),
-      ),
+      swaggerUi.setup(openAPIDocument),
     );
   }
 
