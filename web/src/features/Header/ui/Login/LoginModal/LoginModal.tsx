@@ -15,7 +15,7 @@ export const LoginModal: FC<Props> = ({ variant, isOpen, onClose }) => {
       case ModalVariants.LOGIN:
         return <div>mock</div>;
       case ModalVariants.REGISTRATION:
-        return <RegistrationForm />;
+        return <RegistrationForm onClose={onClose} />;
     }
   };
 

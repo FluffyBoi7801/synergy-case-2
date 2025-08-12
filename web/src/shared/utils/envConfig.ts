@@ -1,5 +1,1 @@
-import { config } from "dotenv";
-
-config();
-
-export const env = process.env;
+export const env = import.meta.env;

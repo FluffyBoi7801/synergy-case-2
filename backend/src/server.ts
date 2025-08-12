@@ -10,11 +10,20 @@ import {
 import { version } from "../package.json";
 import { swaggerRegistrator } from "./api/schemes";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 const app = express();
 
 const PORT = env.PORT || 8000;
 
+// TODO: cors
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  }),
+);
 app.use(express.json());
 app.use(cookieParser());
 
