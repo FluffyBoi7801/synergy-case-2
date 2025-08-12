@@ -3,3 +3,4 @@ export * from "./Modal";
 export * from "./Portal";
 export * from "./TextField";
 export * from "./Button";
+export * from "./Toaster";

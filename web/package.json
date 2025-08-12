@@ -36,7 +36,9 @@
     "sass": "^1.89.2",
     "swagger-typescript-api": "^12.0.4",
     "typescript": "^5.9.2",
+    "uuid": "^11.1.0",
     "vite": "^7.0.6",
-    "yup": "^1.7.0"
+    "yup": "^1.7.0",
+    "zustand": "^5.0.7"
   }
 }
