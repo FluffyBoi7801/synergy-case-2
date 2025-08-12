@@ -1,7 +1,9 @@
+import { FC } from "react";
 import { Button, Text } from "@/shared/ui";
 import { TextAlign } from "@/shared/ui/Text/Text.tsx";
 import classes from "./RegistrationForm.module.scss";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { FormValues } from "@/features/Header/ui/Login/LoginModal/forms/RegistrationForm/types.ts";
 import {
   INITIAL_VALUES,
@@ -11,7 +13,7 @@ import { ControlledTextField } from "@/features/Header/ui/Login/LoginModal/forms
 import { ButtonType } from "@/shared/ui/Button/Button.tsx";
 import { useCreateUser } from "@/shared/api/user";
 import { buildFormValues } from "@/features/Header/ui/Login/LoginModal/forms/RegistrationForm/utils";
-import { FC } from "react";
+import { validationScheme } from "@/features/Header/ui/Login/LoginModal/forms/RegistrationForm/validationScheme";
 
 type Props = {
   onClose: Function;
@@ -23,6 +25,7 @@ export const RegistrationForm: FC<Props> = ({ onClose }) => {
     handleSubmit,
     formState: { isValid },
   } = useForm<FormValues>({
+    resolver: yupResolver(validationScheme),
     defaultValues: INITIAL_VALUES,
     mode: "onChange",
   });

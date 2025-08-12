@@ -20,7 +20,14 @@ export const ControlledTextField: FC<Props> = ({
     <Controller
       name={name}
       control={control}
-      render={({ field }) => <TextField label={label} type={type} {...field} />}
+      render={({ field, fieldState: { error } }) => (
+        <TextField
+          label={label}
+          type={type}
+          error={error?.message}
+          {...field}
+        />
+      )}
     />
   );
 };

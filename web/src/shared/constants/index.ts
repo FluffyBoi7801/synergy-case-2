@@ -19,4 +19,14 @@ export const BLOG_ROUTES_PATHS: Record<keyof typeof BLOG_ROUTES_KEYS, string> =
 
 export const COLORS = {
   WHITE: "white",
+  RED: "red",
+};
+
+export const VALIDATION_ERRORS = {
+  REQUIRED: "Обязательное поле",
+  EMAIL: "Некорректный формат email",
+  PASSWORD_MISMATCH: "Пароли не совпадают",
+  PASSWORD_TOO_SHORT: "Пароль должен быть не менее 8 символов",
+  PASSWORD_NO_UPPERCASE: "Пароль должен содержать хотя бы одну заглавную букву",
+  PASSWORD_NO_SPECIAL_CHAR: "Пароль должен содержать хотя бы один спецсимвол",
 };
