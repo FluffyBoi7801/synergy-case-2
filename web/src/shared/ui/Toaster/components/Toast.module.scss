@@ -1,5 +1,7 @@
 .toast {
   padding: 8px 12px;
   border-radius: 8px;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.2);
+  outline: 2px solid var(--block-background);
   background: var(--block-dark-background);
 }

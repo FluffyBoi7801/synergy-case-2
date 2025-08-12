@@ -5,10 +5,8 @@ import { Toast, ToastType } from "@/shared/ui/Toaster/components";
 import { useEffect } from "react";
 import classes from "./Toaster.module.scss";
 
-const TOAST_TIMER = 6000;
-
 export const Toaster = () => {
-  const { toasts, removeToast, addToast } = useToaster();
+  const { toasts, addToast } = useToaster();
 
   useEffect(() => {
     addToast({
@@ -19,25 +17,15 @@ export const Toaster = () => {
 
   return (
     <Portal>
-      <AnimatePresence>
-        <div className={classes.toaster}>
-          {toasts.map(({ id, type, text }) => {
-            const handleRemoveClick = () => {
-              removeToast(id);
-            };
-
-            setTimeout(() => {
-              handleRemoveClick();
-            }, TOAST_TIMER);
-
-            return (
-              <Toast key={id} type={type}>
-                {text}
-              </Toast>
-            );
-          })}
-        </div>
-      </AnimatePresence>
+      <div className={classes.toaster}>
+        <AnimatePresence initial={false} mode="popLayout">
+          {toasts.map(({ id, type, text }) => (
+            <Toast key={id} id={id} type={type}>
+              {text}
+            </Toast>
+          ))}
+        </AnimatePresence>
+      </div>
     </Portal>
   );
 };
