@@ -1,7 +1,55 @@
 .toast {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 24px 1fr 24px;
   padding: 8px 12px;
   border-radius: 8px;
   box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.2);
   outline: 2px solid var(--block-background);
   background: var(--block-dark-background);
+  gap: 12px;
+
+  &_error {
+    outline-color: var(--outline-error);
+  }
+
+  &__closeIcon {
+    all: unset;
+    justify-self: flex-end;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &::before {
+      content: "";
+      background-color: red;
+      width: var(--src);
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    &:active {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+  }
+
+  &__progressbar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    border-radius: 12px;
+    background-color: white;
+    transition: width 50ms;
+  }
 }
