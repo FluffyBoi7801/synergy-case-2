@@ -1,11 +1,18 @@
 import { FC } from "react";
 import classes from "./Profile.module.scss";
+import { User } from "@/shared/store/currentUser/currentUser";
 
-export const Profile: FC = () => {
+type Props = {
+  user: User;
+};
+
+export const Profile: FC<Props> = ({ user }) => {
+  console.log(user);
+
   return (
     <div className={classes.profile}>
       <div className={classes.profile__profileInfo}>
-        Семенов А.А.
+        {user.firstname} {user.lastname}
         <div className={classes.profile__avatar} />
       </div>
     </div>

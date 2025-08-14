@@ -16,7 +16,7 @@ export const getCurrentUser = async (req: Request, res: Response) => {
 
   return res.status(200).json({
     id: userData.id,
-    firstName: userData.firstname,
-    lastName: userData.lastname,
+    firstname: userData.firstname,
+    lastname: userData.lastname,
   });
 };

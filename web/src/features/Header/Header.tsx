@@ -2,9 +2,11 @@ import { FC } from "react";
 import classes from "./Header.module.scss";
 import { Login, Logo, Profile } from "./ui";
 import { NineDots } from "@/shared/icons";
+import { useCurrentUser } from "@/shared/store";
 
 const Header: FC = () => {
-  const isUserLoggedin = false;
+  const { user } = useCurrentUser();
+  const isUserLoggedin = !!user;
 
   return (
     <header className={classes.header}>
@@ -13,7 +15,7 @@ const Header: FC = () => {
         <button className={classes.header__ninedotsButton}>
           <NineDots />
         </button>
-        {isUserLoggedin ? <Profile /> : <Login />}
+        {isUserLoggedin ? <Profile user={user} /> : <Login />}
       </div>
     </header>
   );
