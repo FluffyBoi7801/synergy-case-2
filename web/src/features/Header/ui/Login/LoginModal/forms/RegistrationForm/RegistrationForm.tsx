@@ -14,6 +14,9 @@ import { ButtonType } from "@/shared/ui/Button/Button.tsx";
 import { useCreateUser } from "@/shared/api/user";
 import { buildFormValues } from "@/features/Header/ui/Login/LoginModal/forms/RegistrationForm/utils";
 import { validationScheme } from "@/features/Header/ui/Login/LoginModal/forms/RegistrationForm/validationScheme";
+import { useToaster } from "@/shared/ui/Toaster/hooks";
+import { AxiosError } from "axios";
+import { ToastType } from "@/shared/ui/Toaster/components";
 
 type Props = {
   onClose: Function;
@@ -29,6 +32,7 @@ export const RegistrationForm: FC<Props> = ({ onClose }) => {
     defaultValues: INITIAL_VALUES,
     mode: "onChange",
   });
+  const { addToast } = useToaster();
   const { mutate: createUser, isPending: isLoading } = useCreateUser();
 
   const onSubmit = (values: FormValues) => {
@@ -39,11 +43,20 @@ export const RegistrationForm: FC<Props> = ({ onClose }) => {
     if (variables) {
       createUser(variables, {
         onSuccess: () => {
+          addToast({
+            type: ToastType.OK,
+            text: "Пользователь успешно создан, проверьте почту",
+          });
           onClose();
-          console.log("success");
         },
-        onError: () => {
-          console.log("error", "Ошибка при регистрации. Попробуйте позже");
+        onError: (e) => {
+          console.log(e);
+          if (e instanceof AxiosError) {
+            addToast({
+              type: ToastType.ERROR,
+              text: e.response?.data?.message || "Произошла неизвестная ошибка",
+            });
+          }
         },
       });
     }

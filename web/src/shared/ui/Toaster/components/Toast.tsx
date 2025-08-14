@@ -41,7 +41,6 @@ export const Toast: FC<PropsWithChildren<Props>> = ({ id, type, children }) => {
 
   useEffect(() => {
     timer = setInterval(() => {
-      console.log(progress);
       if (progress + Number(progressStep) < 100) {
         setProgress((prev) => Number((prev + Number(progressStep)).toFixed(2)));
       } else if (progress === 100) {
@@ -49,7 +48,6 @@ export const Toast: FC<PropsWithChildren<Props>> = ({ id, type, children }) => {
       } else {
         setProgress(100);
       }
-      console.log(progress);
     }, TIMEOUT_DISCRETIZATION);
 
     return () => clearInterval(timer);

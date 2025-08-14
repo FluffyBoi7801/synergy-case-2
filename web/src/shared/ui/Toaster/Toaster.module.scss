@@ -8,5 +8,6 @@
   flex-direction: column-reverse;
   padding: 16px 20px;
   gap: 12px;
+  overflow-y: hidden;
   z-index: calc(infinity * 1);
 }
