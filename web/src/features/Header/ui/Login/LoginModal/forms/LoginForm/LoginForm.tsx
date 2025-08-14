@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useToaster } from "@/shared/ui/Toaster/hooks";
-import { useGetCurrentUser, useLoginUser } from "@/shared/api/user";
+import { useLoginUser } from "@/shared/api/user";
 import classes from "./LoginForm.module.scss";
 import { Text, TextAlign } from "@/shared/ui/Text/Text.tsx";
 import { Button } from "@/shared/ui";
@@ -17,7 +17,6 @@ import { AxiosError } from "axios";
 import { ToastType } from "@/shared/ui/Toaster/components";
 import { buildFormValues } from "@/features/Header/ui/Login/LoginModal/forms/LoginForm/utils";
 import { FormValues } from "@/features/Header/ui/Login/LoginModal/forms/LoginForm/types.ts";
-import { useCurrentUser } from "@/shared/store";
 
 type Props = {
   onClose: Function;
@@ -33,7 +32,6 @@ export const LoginForm: FC<Props> = ({ onClose }) => {
     resolver: yupResolver(validationSchema),
     mode: "onChange",
   });
-  const { setUserInfo } = useCurrentUser();
   const { addToast } = useToaster();
   const { mutate: loginUser, isPending: isLoading } = useLoginUser();
 
