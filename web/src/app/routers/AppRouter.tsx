@@ -8,9 +8,8 @@ import {
 import {
   BLOG_ROUTES_KEYS,
   ROOT_PATH,
-  SERVICES_PATHS,
   SERVICES_ROOTS,
-} from "../../shared/constants";
+} from "@/shared/constants";
 import Layout from "../layout";
 import { Posts } from "../../pages/blog";
 
