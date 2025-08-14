@@ -28,8 +28,8 @@ export const RegistrationForm: FC<Props> = ({ onClose }) => {
     handleSubmit,
     formState: { isValid },
   } = useForm<FormValues>({
-    resolver: yupResolver(validationScheme),
     defaultValues: INITIAL_VALUES,
+    resolver: yupResolver(validationScheme),
     mode: "onChange",
   });
   const { addToast } = useToaster();
