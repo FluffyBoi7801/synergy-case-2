@@ -24,3 +24,15 @@ export interface CreateUserRequest {
 export interface MessageResponse {
   message: string;
 }
+
+export interface LoginUserRequest {
+  /** @format email */
+  email: string;
+  password: string;
+}
+
+export interface CurrentUserResponse {
+  id: string;
+  firstname: string;
+  lastname: string;
+}

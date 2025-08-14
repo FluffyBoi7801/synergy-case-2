@@ -1,4 +1,4 @@
-import { FormValues } from "@/features/Header/ui/Login/LoginModal/forms/RegistrationForm/types";
+import type { FormValues } from "@/features/Header/ui/Login/LoginModal/forms/RegistrationForm/types";
 
 export const VALUES_KEYS: Readonly<Record<string, keyof FormValues>> = {
   firstname: "firstname",

@@ -36,8 +36,6 @@ export const RegistrationForm: FC<Props> = ({ onClose }) => {
   const { mutate: createUser, isPending: isLoading } = useCreateUser();
 
   const onSubmit = (values: FormValues) => {
-    console.log(values);
-
     const variables = buildFormValues(values);
 
     if (variables) {
@@ -50,7 +48,6 @@ export const RegistrationForm: FC<Props> = ({ onClose }) => {
           onClose();
         },
         onError: (e) => {
-          console.log(e);
           if (e instanceof AxiosError) {
             addToast({
               type: ToastType.ERROR,
