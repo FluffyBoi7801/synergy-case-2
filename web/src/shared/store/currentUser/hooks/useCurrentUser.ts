@@ -5,5 +5,7 @@ export const useCurrentUser = () => {
 
   const setUserInfo = currentUserStore((state) => state.setUserInfo);
 
-  return { user, setUserInfo };
+  const clearUserInfo = currentUserStore((state) => state.clearUserInfo);
+
+  return { user, setUserInfo, clearUserInfo };
 };

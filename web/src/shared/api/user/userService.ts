@@ -7,6 +7,7 @@ import type {
 const API_URLS = {
   users: "/users",
   login: "/login",
+  logout: "/logout",
 };
 
 const USERS_API = {
@@ -19,4 +20,5 @@ export const userService = {
   loginUser: (variables: LoginUserRequest) =>
     apiClient.post(API_URLS.login, variables),
   getCurrentUser: () => apiClient.get(`${API_URLS.users}${USERS_API.current}`),
+  logoutUser: () => apiClient.post(API_URLS.logout),
 };

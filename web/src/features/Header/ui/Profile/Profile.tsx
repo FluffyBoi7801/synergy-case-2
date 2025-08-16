@@ -4,6 +4,10 @@ import { User } from "@/shared/store/currentUser/currentUser";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import { Button } from "@/shared/ui";
 import { ButtonColor } from "@/shared/ui/Button/Button.tsx";
+import { useLogoutUser } from "@/shared/api/user";
+import { useToaster } from "@/shared/ui/Toaster/hooks";
+import { ToastType } from "@/shared/ui/Toaster/components";
+import { useCurrentUser } from "@/shared/store";
 
 enum DropdownState {
   INITIAL = "INITIAL",
@@ -22,9 +26,27 @@ type Props = {
 };
 
 export const Profile: FC<Props> = ({ user }) => {
+  const { mutate: logoutUser, isPending: isUserLoggingout } = useLogoutUser();
+  const { clearUserInfo } = useCurrentUser();
+  const { addToast } = useToaster();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleToggleProfile = () => setIsDropdownOpen((prev) => !prev);
+
+  const handleLogout = () => {
+    logoutUser({
+      onSuccess: () => {
+        addToast({ type: ToastType.OK, text: "Выход выполнен" });
+        clearUserInfo();
+      },
+      onError: () => {
+        addToast({
+          type: ToastType.ERROR,
+          text: "Произошла ошибка при выходе",
+        });
+      },
+    });
+  };
 
   return (
     <div className={classes.profile}>
@@ -43,7 +65,11 @@ export const Profile: FC<Props> = ({ user }) => {
             animate={DropdownState.VISIBLE}
             exit={DropdownState.HIDDEN}
           >
-            <Button color={ButtonColor.attention} onClick={handleToggleProfile}>
+            <Button
+              color={ButtonColor.attention}
+              isLoading={isUserLoggingout}
+              onClick={handleLogout}
+            >
               Выход
             </Button>
           </motion.div>
