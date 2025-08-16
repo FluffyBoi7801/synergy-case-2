@@ -36,7 +36,7 @@ export const Modal: FC<PropsWithChildren<Props>> = ({
 }) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
-  useClickOutside(modalRef, onClose);
+  useClickOutside<HTMLDivElement>(modalRef, onClose);
 
   return (
     <Portal>

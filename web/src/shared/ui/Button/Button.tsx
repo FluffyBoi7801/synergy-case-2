@@ -3,12 +3,18 @@ import classes from "./Button.module.scss";
 import cn from "classnames";
 import { Loader } from "@/shared/ui/Loader/Loader.tsx";
 
+export enum ButtonColor {
+  primary = "primary",
+  attention = "attention",
+}
+
 export enum ButtonType {
   submit = "submit",
 }
 
 type Props = {
   type?: ButtonType;
+  color?: ButtonColor;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   isLoading?: boolean;
   disabled?: boolean;
@@ -16,6 +22,7 @@ type Props = {
 
 export const Button: FC<PropsWithChildren<Props>> = ({
   type,
+  color = ButtonColor.primary,
   onClick,
   isLoading,
   disabled,
@@ -26,6 +33,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
       type={type}
       className={cn(
         classes.button,
+        classes[`button_${color}`],
         (disabled || isLoading) && classes.button__disabled
       )}
       disabled={disabled || isLoading}

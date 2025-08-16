@@ -18,6 +18,8 @@ body {
     --header-background: #F68E5F;
     --block-background: #F5DD90;
     --outline-error: #F53E3E;
+    --outline-error-hover: #dd3131;
+    --outline-error-active: #da2929;
     --outline-success: #29B752;
     --block-dark-background: #252525;
     --button-hover: rgba(0, 0, 0, 0.2);

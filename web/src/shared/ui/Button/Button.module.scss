@@ -8,17 +8,32 @@
   align-items: center;
   padding: 8px 12px;
   border-radius: 8px;
-  background-color: var(--button-background);
   box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.2);
   transition: background-color 0.2s;
   cursor: pointer;
 
-  &:hover {
-    background-color: var(--button-background-hover);
+  &_attention {
+    background-color: var(--outline-error);
+
+    &:hover {
+      background-color: var(--outline-error-hover);
+    }
+
+    &:active {
+      background-color: var(--outline-error-active);
+    }
   }
 
-  &:active {
+  &_primary {
     background-color: var(--button-background);
+
+    &:hover {
+      background-color: var(--button-background-hover);
+    }
+
+    &:active {
+      background-color: var(--button-background);
+    }
   }
 
   &__disabled {

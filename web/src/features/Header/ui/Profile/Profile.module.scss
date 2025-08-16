@@ -1,8 +1,13 @@
 .profile {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
+  position: relative;
+
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+  }
 
   &__profileInfo {
     display: flex;
@@ -16,5 +21,17 @@
     aspect-ratio: 1/1;
     border-radius: 50%;
     background-color: black;
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 120%;
+    left: 0;
+    width: 100%;
+    border-radius: 8px;
+    padding: 16px 20px;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.2);
+    outline: 2px solid var(--block-background);
+    background-color: var(--block-dark-background);
   }
 }
