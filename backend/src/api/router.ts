@@ -15,6 +15,7 @@ const router = (() => {
     userService.activate,
   );
   router.post(API_ENDPOINTS.LOGIN, userService.login);
+  router.post(API_ENDPOINTS.LOGOUT, authenticateToken, userService.logout);
   router.get(
     `${API_ENDPOINTS.USERS}${USERS_API_ENDPOINTS.CURRENT}`,
     authenticateToken,

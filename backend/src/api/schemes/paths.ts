@@ -5,6 +5,7 @@ import {
   currentUser,
   getVersion,
   loginUser,
+  logoutUser,
 } from "./endpoints";
 
 export const OPEN_API_PATHS: RouteConfig[] = [
@@ -13,4 +14,5 @@ export const OPEN_API_PATHS: RouteConfig[] = [
   activateUser,
   loginUser,
   currentUser,
+  logoutUser,
 ];
