@@ -28,4 +28,29 @@ model User {
   updated_at DateTime? @updatedAt
   is_active Boolean @default(false)
   activation_code String? @unique
+  posts Post[]
+}
+
+model Comment {
+  id String @id @default(uuid()) @unique
+  postId String
+  post Post @relation(fields: [postId], references: [id])
+}
+
+model Tag {
+  id String @id @default(uuid()) @unique
+  postId String
+  post Post @relation(fields: [postId], references: [id])
+}
+
+model Post {
+  id String @id @default(uuid()) @unique
+  tags Tag[]
+  title String
+  text String
+  comments Comment[]
+  authorId String
+  author User @relation(fields: [authorId], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime? @updatedAt
 }
