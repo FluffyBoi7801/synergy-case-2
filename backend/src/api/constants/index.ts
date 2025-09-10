@@ -8,4 +8,5 @@ export const API_ENDPOINTS = {
 export const USERS_API_ENDPOINTS = {
   CURRENT: "/current",
   ACTIVATE: "/activate",
+  CHECK_AUTH: "/check-auth",
 };

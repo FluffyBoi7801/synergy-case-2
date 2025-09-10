@@ -1,18 +1,25 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import classes from "./Layout.module.scss";
 import { Outlet } from "react-router-dom";
 import { Header } from "../../features";
 import { useCurrentUser } from "@/shared/store";
-import { useGetCurrentUser } from "@/shared/api/user";
+import { useCheckUserAuth, useGetCurrentUser } from "@/shared/api/user";
 import { Loader } from "@/shared/ui/Loader";
-
-// TODO: enabled on cookies
 
 const Layout: FC = () => {
   const { setUserInfo } = useCurrentUser();
+  const [isUserAuth, setIsUserAuth] = useState(false);
+
+  const { isSuccess: isAuthSuccess } = useCheckUserAuth();
+
+  useEffect(() => {
+    setIsUserAuth(isAuthSuccess);
+  }, [isAuthSuccess]);
 
   const { data: currentUser, isFetching: isCurrentUserFetching } =
-    useGetCurrentUser();
+    useGetCurrentUser({
+      enabled: isUserAuth,
+    });
 
   useEffect(() => {
     if (currentUser) {

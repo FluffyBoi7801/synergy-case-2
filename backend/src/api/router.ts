@@ -3,6 +3,7 @@ import { API_ENDPOINTS, USERS_API_ENDPOINTS } from "./constants";
 import { versionService } from "./services/version";
 import { userService } from "./services/user";
 import { authenticateToken } from "./services/utils";
+import { checkAuth } from "./services/user/handlers";
 
 const router = (() => {
   const router = Router();
@@ -20,6 +21,11 @@ const router = (() => {
     `${API_ENDPOINTS.USERS}${USERS_API_ENDPOINTS.CURRENT}`,
     authenticateToken,
     userService.current,
+  );
+  router.get(
+    `${API_ENDPOINTS.USERS}${USERS_API_ENDPOINTS.CHECK_AUTH}`,
+    authenticateToken,
+    checkAuth,
   );
 
   return router;

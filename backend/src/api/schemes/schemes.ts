@@ -1,4 +1,5 @@
 import {
+  CheckAuthResponse,
   CreateUserRequest,
   CurrentUserResponse,
   LoginUserRequest,
@@ -12,4 +13,5 @@ export const OPEN_API_SCHEMES = [
   { name: "MessageResponse", schema: MessageResponse },
   { name: "LoginUserRequest", schema: LoginUserRequest },
   { name: "CurrentUserResponse", schema: CurrentUserResponse },
+  { name: "CheckAuthResponse", schema: CheckAuthResponse },
 ];

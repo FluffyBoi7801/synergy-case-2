@@ -12,6 +12,7 @@ const API_URLS = {
 
 const USERS_API = {
   current: "/current",
+  checkAuth: "/check-auth",
 };
 
 export const userService = {
@@ -21,4 +22,5 @@ export const userService = {
     apiClient.post(API_URLS.login, variables),
   getCurrentUser: () => apiClient.get(`${API_URLS.users}${USERS_API.current}`),
   logoutUser: () => apiClient.post(API_URLS.logout),
+  checkAuth: () => apiClient.get(`${API_URLS.users}${USERS_API.checkAuth}`),
 };

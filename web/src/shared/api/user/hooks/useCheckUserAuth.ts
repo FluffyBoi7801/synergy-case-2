@@ -3,7 +3,7 @@ import { AxiosResponse } from "axios";
 import { userService } from "@/shared/api/user/userService.ts";
 import { CurrentUserResponse } from "@/shared/api/__generated__/apiTypes.ts";
 
-export const useGetCurrentUser = (
+export const useCheckUserAuth = (
   options?: Omit<
     UseQueryOptions<
       AxiosResponse<CurrentUserResponse, unknown>,
@@ -16,8 +16,8 @@ export const useGetCurrentUser = (
 ) => {
   return useQuery({
     ...options,
-    queryKey: ["currentUser"],
-    queryFn: userService.getCurrentUser,
+    queryKey: ["checkUserAuth"],
+    queryFn: userService.checkAuth,
     select: (data) => data.data,
   });
 };

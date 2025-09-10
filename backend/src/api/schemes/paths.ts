@@ -1,6 +1,7 @@
 import { RouteConfig } from "@asteasolutions/zod-to-openapi";
 import {
   activateUser,
+  checkAuth,
   createUser,
   currentUser,
   getVersion,
@@ -15,4 +16,5 @@ export const OPEN_API_PATHS: RouteConfig[] = [
   loginUser,
   currentUser,
   logoutUser,
+  checkAuth,
 ];
