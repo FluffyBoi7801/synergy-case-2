@@ -17,6 +17,7 @@ import { AxiosError } from "axios";
 import { ToastType } from "@/shared/ui/Toaster/components";
 import { buildFormValues } from "@/features/Header/ui/Login/LoginModal/forms/LoginForm/utils";
 import { FormValues } from "@/features/Header/ui/Login/LoginModal/forms/LoginForm/types.ts";
+import { useCurrentUser } from "@/shared/store";
 
 type Props = {
   onClose: Function;
@@ -34,9 +35,11 @@ export const LoginForm: FC<Props> = ({ onClose }) => {
   });
   const { addToast } = useToaster();
   const { mutate: loginUser, isPending: isLoading } = useLoginUser();
-  const { refetch: fetchCurrentUser } = useGetCurrentUser({
-    enabled: false,
-  });
+  const { setUserInfo } = useCurrentUser();
+  const { data: currentUserData, refetch: fetchCurrentUser } =
+    useGetCurrentUser({
+      enabled: false,
+    });
 
   const onSubmit = (values: FormValues) => {
     const variables = buildFormValues(values);
@@ -46,6 +49,7 @@ export const LoginForm: FC<Props> = ({ onClose }) => {
         onSuccess: () => {
           fetchCurrentUser()
             .then(() => {
+              setUserInfo(currentUserData);
               addToast({
                 type: ToastType.OK,
                 text: "Вы успешно вошли в систему",
