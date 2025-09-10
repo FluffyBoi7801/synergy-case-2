@@ -8,6 +8,8 @@ import { useLogoutUser } from "@/shared/api/user";
 import { useToaster } from "@/shared/ui/Toaster/hooks";
 import { ToastType } from "@/shared/ui/Toaster/components";
 import { useCurrentUser } from "@/shared/store";
+import { useNavigate } from "react-router-dom";
+import { SERVICES_PATHS } from "@/shared/constants";
 
 enum DropdownState {
   INITIAL = "INITIAL",
@@ -26,6 +28,7 @@ type Props = {
 };
 
 export const Profile: FC<Props> = ({ user }) => {
+  const navigate = useNavigate();
   const { addToast } = useToaster();
   const { mutate: logoutUser, isPending: isUserLoggingout } = useLogoutUser({
     onSuccess: () => {
@@ -43,6 +46,11 @@ export const Profile: FC<Props> = ({ user }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleToggleProfile = () => setIsDropdownOpen((prev) => !prev);
+
+  const handleProfileClick = () => {
+    navigate(SERVICES_PATHS.PROFILE);
+    handleToggleProfile();
+  };
 
   const handleLogout = () => {
     logoutUser({});
@@ -65,6 +73,13 @@ export const Profile: FC<Props> = ({ user }) => {
             animate={DropdownState.VISIBLE}
             exit={DropdownState.HIDDEN}
           >
+            <Button
+              color={ButtonColor.primary}
+              isLoading={isUserLoggingout}
+              onClick={handleProfileClick}
+            >
+              Мой профиль
+            </Button>
             <Button
               color={ButtonColor.attention}
               isLoading={isUserLoggingout}

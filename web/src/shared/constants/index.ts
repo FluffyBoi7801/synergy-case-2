@@ -2,10 +2,12 @@ export const ROOT_PATH = "/";
 
 export const SERVICES_ROOTS: Record<string, string> = {
   BLOG: "blog",
+  PROFILE: "profile",
 };
 
 export const SERVICES_PATHS: Record<keyof typeof SERVICES_ROOTS, string> = {
   BLOG: "/blog",
+  PROFILE: "/profile",
 };
 
 export const BLOG_ROUTES_KEYS: Record<string, string> = {

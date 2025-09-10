@@ -12,6 +12,7 @@ import {
 } from "@/shared/constants";
 import Layout from "../layout";
 import { Posts } from "../../pages/blog";
+import { Profile } from "@/pages/profile";
 
 const AppRouter = () => {
   const routes: RouteObject[] = [
@@ -29,6 +30,10 @@ const AppRouter = () => {
               element: <Navigate to={"posts"} />,
             },
           ],
+        },
+        {
+          path: SERVICES_ROOTS.PROFILE,
+          element: <Profile />,
         },
         {
           path: ROOT_PATH,
