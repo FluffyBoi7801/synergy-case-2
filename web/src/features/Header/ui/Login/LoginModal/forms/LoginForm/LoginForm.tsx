@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useToaster } from "@/shared/ui/Toaster/hooks";
-import { useLoginUser } from "@/shared/api/user";
+import { useGetCurrentUser, useLoginUser } from "@/shared/api/user";
 import classes from "./LoginForm.module.scss";
 import { Text, TextAlign } from "@/shared/ui/Text/Text.tsx";
 import { Button } from "@/shared/ui";
@@ -34,6 +34,9 @@ export const LoginForm: FC<Props> = ({ onClose }) => {
   });
   const { addToast } = useToaster();
   const { mutate: loginUser, isPending: isLoading } = useLoginUser();
+  const { refetch: fetchCurrentUser } = useGetCurrentUser({
+    enabled: false,
+  });
 
   const onSubmit = (values: FormValues) => {
     const variables = buildFormValues(values);
@@ -41,10 +44,20 @@ export const LoginForm: FC<Props> = ({ onClose }) => {
     if (variables) {
       loginUser(variables, {
         onSuccess: () => {
-          addToast({
-            type: ToastType.OK,
-            text: "Вы успешно вошли в систему",
-          });
+          fetchCurrentUser()
+            .then(() => {
+              addToast({
+                type: ToastType.OK,
+                text: "Вы успешно вошли в систему",
+              });
+            })
+            .catch(() => {
+              addToast({
+                type: ToastType.ERROR,
+                text: "Ошибка при входе",
+              });
+            });
+
           onClose();
         },
         onError: (e) => {

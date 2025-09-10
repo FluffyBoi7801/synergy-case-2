@@ -26,26 +26,26 @@ type Props = {
 };
 
 export const Profile: FC<Props> = ({ user }) => {
-  const { mutate: logoutUser, isPending: isUserLoggingout } = useLogoutUser();
-  const { clearUserInfo } = useCurrentUser();
   const { addToast } = useToaster();
+  const { mutate: logoutUser, isPending: isUserLoggingout } = useLogoutUser({
+    onSuccess: () => {
+      addToast({ type: ToastType.OK, text: "Выход выполнен" });
+      clearUserInfo();
+    },
+    onError: () => {
+      addToast({
+        type: ToastType.ERROR,
+        text: "Произошла ошибка при выходе",
+      });
+    },
+  });
+  const { clearUserInfo } = useCurrentUser();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleToggleProfile = () => setIsDropdownOpen((prev) => !prev);
 
   const handleLogout = () => {
-    logoutUser({
-      onSuccess: () => {
-        addToast({ type: ToastType.OK, text: "Выход выполнен" });
-        clearUserInfo();
-      },
-      onError: () => {
-        addToast({
-          type: ToastType.ERROR,
-          text: "Произошла ошибка при выходе",
-        });
-      },
-    });
+    logoutUser({});
   };
 
   return (
